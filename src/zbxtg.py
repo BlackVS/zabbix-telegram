@@ -103,7 +103,12 @@ class ZabbixAPI:
         self.cookie = cookie
 
     def graph_get(self, itemids, period, title, width, height):
-
+        if not os.path.exists(zbxtg_settings.zbxtg_tmp_dir):
+            #try create temp dir
+            os.mkdir(zbxtg_settings.zbxtg_tmp_dir)
+        if not os.path.exists(zbxtg_settings.zbxtg_tmp_dir) or not os.path.isdir(zbxtg_settings.zbxtg_tmp_dir):
+            logger.error("Can't create temp directory: {}".format(zbxtg_settings.zbxtg_tmp_dir))
+            return None
         fileURL = zbxtg_settings.zbxtg_tmp_dir + "/{0}.png".format("-".join(map(str,itemids)))
 
         title = requests.utils.quote(title)
