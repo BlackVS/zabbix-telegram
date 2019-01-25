@@ -106,6 +106,7 @@ class ZabbixAPI:
         if not os.path.exists(zbxtg_settings.zbxtg_tmp_dir):
             #try create temp dir
             os.mkdir(zbxtg_settings.zbxtg_tmp_dir)
+    	    os.chmod(zbxtg_settings.zbxtg_tmp_dir,0777)
         if not os.path.exists(zbxtg_settings.zbxtg_tmp_dir) or not os.path.isdir(zbxtg_settings.zbxtg_tmp_dir):
             logger.error("Can't create temp directory: {}".format(zbxtg_settings.zbxtg_tmp_dir))
             return None
